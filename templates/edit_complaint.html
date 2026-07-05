@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Edit Complaint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="report-card">
+
+    <h2>✏ Edit Complaint</h2>
+
+    <br>
+
+    <form method="POST">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    value="{{ complaint[1] }}"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+
+                <select name="category" required>
+
+                    <option value="Infrastructure"
+                    {% if complaint[2]=="Infrastructure" %}selected{% endif %}>
+                    Infrastructure
+                    </option>
+
+                    <option value="Cleanliness"
+                    {% if complaint[2]=="Cleanliness" %}selected{% endif %}>
+                    Cleanliness
+                    </option>
+
+                    <option value="Electricity"
+                    {% if complaint[2]=="Electricity" %}selected{% endif %}>
+                    Electricity
+                    </option>
+
+                    <option value="Water"
+                    {% if complaint[2]=="Water" %}selected{% endif %}>
+                    Water
+                    </option>
+
+                    <option value="Security"
+                    {% if complaint[2]=="Security" %}selected{% endif %}>
+                    Security
+                    </option>
+
+                    <option value="Other"
+                    {% if complaint[2]=="Other" %}selected{% endif %}>
+                    Other
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <label>Location</label>
+
+        <input
+            type="text"
+            name="location"
+            value="{{ complaint[3] }}"
+            required>
+
+        <br><br>
+
+        <label>Description</label>
+
+        <textarea
+            name="description"
+            rows="6"
+            required>{{ complaint[4] }}</textarea>
+
+        <button type="submit">
+            💾 Save Changes
+        </button>
+
+    </form>
+
+    <a href="/my_complaints" class="button">
+        ⬅ Back
+    </a>
+
+</div>
+
+</body>
+
+</html>

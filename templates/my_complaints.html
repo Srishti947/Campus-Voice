@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Complaints</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-card">
+
+    <h2>📄 My Complaints</h2>
+    <p>Track the complaints you have submitted.</p>
+
+    <br>
+
+    {% if complaints %}
+
+        {% for complaint in complaints %}
+
+        <div class="complaint-box">
+
+            <h3>{{ complaint[1] }}</h3>
+            <p><strong>Complaint ID:</strong> CV-{{ "%03d"|format(complaint[0]) }}</p>
+
+            <p><strong>📂 Category:</strong> {{ complaint[2] }}</p>
+
+            <p><strong>📍 Location:</strong> {{ complaint[3] }}</p>
+
+            <p><strong>📝 Description:</strong> {{ complaint[4] }}</p>
+
+            {% if complaint[7] %}
+                <img
+                    src="{{ url_for('static', filename='uploads/' + complaint[7]) }}"
+                    width="250"
+                    style="border-radius:10px; margin:10px 0;">
+            {% endif %}
+
+            <p><strong>📌 Status:</strong> {{ complaint[5] }}</p>
+            {% if complaint[5] == "Pending" %}
+
+    <a href="/edit_complaint/{{ complaint[0] }}" class="button">
+        ✏ Edit Complaint
+    </a>
+
+    <a href="/delete_complaint/{{ complaint[0] }}" class="button">
+        🗑 Delete Complaint
+    </a>
+
+{% endif %}
+
+            <p><strong>👍 Supports:</strong> {{ complaint[6] }}</p>
+
+            <p><strong>🗓 Reported:</strong> {{ complaint[8] }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>You haven't submitted any complaints yet.</p>
+
+    {% endif %}
+
+    <a class="button" href="/dashboard">
+        ⬅ Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>

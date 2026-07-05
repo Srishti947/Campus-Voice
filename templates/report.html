@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Report an Issue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="report-card">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <h2>📝 Report an Issue</h2>
+
+    <form action="/report" method="POST" enctype="multipart/form-data">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Issue Title</label>
+            <input type="text" name="title" required>
+        </div>
+
+        <div class="form-group">
+            <label>Category</label>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option>Water Leakage</option>
+                <option>Electricity</option>
+                <option>Cleanliness</option>
+                <option>Classroom</option>
+                <option>Washroom</option>
+                <option>Canteen</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Location</label>
+            <input
+                type="text"
+                name="location"
+                placeholder="Room 204 / Near Library"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label>Upload Photo</label>
+            <input type="file" name="image">
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea
+            name="description"
+            rows="5"
+            placeholder="Describe the issue..."
+            required></textarea>
+    </div>
+
+    <button type="submit">🚀 Submit Complaint</button>
+
+</form>
+    <br>
+
+    <a class="button" href="/dashboard">⬅ Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

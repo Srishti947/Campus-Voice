@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reported Issues</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-card">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <h2>📋 Reported Issues</h2>
+
+    <br>
+
+    {% if issues %}
+
+        {% for issue, has_supported in issues %}
+
+        <div style="background:white;
+                    color:black;
+                    padding:15px;
+                    border-radius:12px;
+                    margin-bottom:15px;
+                    text-align:left;">
+
+            <h3>{{ issue[1] }}</h3>
+
+            <p style="color:#333;"><b>Category:</b> {{ issue[2] }}</p>
+
+            <p style="color:#333;"><b>Location:</b> {{ issue[3] }}</p>
+
+            <p style="color:#333;"><b>Description:</b> {{ issue[4] }}</p>
+            {% if issue[7] %}
+            <p><b>Photo:</b></p>
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + issue[7]) }}"
+                width="250"
+                style="border-radius:10px; margin-bottom:10px;">
+            {% endif %}
+
+            <p style="color:#333;"><b>Status:</b> {{ issue[5] }}</p>
+            <p style="color:#333;"><b>👍 Supports:</b> {{ issue[6] }}</p>
+
+            {% if has_supported %}
+
+<button disabled
+style="background:gray;color:white;cursor:not-allowed;">
+    ✔ Already Supported
+</button>
+
+{% else %}
+
+<a class="button" href="/support/{{ issue[0] }}">
+    👍 Support This Issue
+</a>
+
+{% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No issues reported yet.</p>
+
+    {% endif %}
+
+    <a class="button" href="/dashboard">
+        ⬅ Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>

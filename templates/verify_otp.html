@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 5px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .error {
+            color: red;
+            margin: 10px 0;
+        }
+
+        .resend {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .resend a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>📧 OTP Verification</h2>
+    <p>Enter the 6-digit code sent to your email</p>
+     
+    <p>OTP expires in: <span id="timer">05:00</span></p>
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="otp" maxlength="6" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+
+    <div class="resend">
+        <p>Didn't receive OTP?</p>
+        <a href="/resend-otp">
+        <button type="button">Resend OTP</button>
+        </a>
+    </div>
+
+</div>
+<script>
+let timeLeft = 300; // 5 minutes in seconds
+
+let timer = document.getElementById("timer");
+
+let countdown = setInterval(function() {
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timer.innerHTML = minutes + ":" + seconds;
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+        clearInterval(countdown);
+        timer.innerHTML = "Expired";
+        timer.style.color = "red";
+    }
+
+}, 1000);
+</script>
+
+</body>
+</html>

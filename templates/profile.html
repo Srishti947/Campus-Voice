@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="profile-card">
+
+    <div class="cover"></div>
+
+    <div class="avatar">
+        👩
+    </div>
+
+    <h2>Welcome!</h2>
+
+    <h3>{{ username }}</h3>
+
+    <p class="status">🟢 Online</p>
+
+    <div class="info-box">
+        <p>📧 Email</p>
+        <strong>{{ email }}</strong>
+    </div>
+
+    <div class="info-box">
+        <p>🔐 Account Status</p>
+        <strong>Active</strong>
+    </div>
+
+    <div class="info-box">
+        <p>🚀 Project</p>
+        <strong>Flask Login System</strong>
+    </div>
+
+    <div class="buttons">
+        <a href="/dashboard" class="btn">🏠 Dashboard</a>
+        <a href="/logout" class="btn logout">🚪 Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

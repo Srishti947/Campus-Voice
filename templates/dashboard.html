@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<div class="dashboard-card">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+
+            <div class="flash-message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+    <div class="dashboard-header">
+
+    <h1>Campus Voice</h1>
+
+    <p class="tagline">
+        Your Voice. Better Campus.
+    </p>
+
+    <div class="welcome-box">
+        <h2>👋 Welcome, {{ username }}</h2>
+        
+    </div>
+
+</div>
+
+<h3>📊 Complaint Statistics</h3>
+
+<div class="stats">
+    <div class="stat-box">
+        <h1>📢</h1>
+        <h2>{{ total }}</h2>
+        <p>Total Complaints</p>
+    </div>
+    <div class="stat-box">
+        <h1>🟡</h1>
+        <h2>{{ pending }}</h2>
+        <p>🟡Pending</p>
+    </div>
+    <div class="stat-box">
+        <h1>🔵</h1>
+        <h2>{{ in_progress }}</h2>
+        <p>🔵In Progress</p>
+    </div>
+    <div class="stat-box">
+         <h1>🟢</h1>
+        <h2>{{ resolved }}</h2>
+        <p>🟢Resolved</p>
+    </div>
+</div>
+
+<hr>
+
+    <hr>
+
+    <h2 style="margin-top:25px; margin-bottom:20px; text-align:center;">
+    🚀 Quick Actions
+</h2>
+
+<div class="actions">
+
+    <a href="/report" class="action-card">
+        <div style="font-size:42px; text-align:center;">📝</div>
+        <h3 style="text-align:center; margin-top:10px;">
+    Report Issue
+</h3>
+        <p>Report a new campus issue anonymously.</p>
+    </a>
+
+    <a href="/complaints" class="action-card">
+        <div style="font-size:42px; text-align:center;">📋</div>
+        <h3 style="text-align:center; margin-top:10px;">
+            View Complaints
+        </h3>
+        <p>Browse all reported campus issues.</p>
+    </a>
+    <a href="/my_complaints" class="action-card">
+        <div style="font-size:42px; text-align:center;">📄</div>
+        <h3 style="text-align:center; margin-top:10px;">
+            My Complaints
+        </h3>
+        <p>Track your submitted complaints.</p>
+    </a>
+
+
+    <a href="/profile" class="action-card">
+        <div style="font-size:42px; text-align:center;">👤</div>
+        <h3 style="text-align:center; margin-top:10px;">
+            Profile
+        </h3>
+        <p>View your account information.</p>
+    </a>
+
+    <a href="/logout" class="action-card">
+        <div style="font-size:42px; text-align:center;">🚪</div>
+        <h3 style="text-align:center; margin-top:10px;">
+            Logout
+        </h3>
+        <p>Sign out safely from your account.</p>
+    </a>
+
+</div>
+
+    <p id="clock"></p>
+
+</div>
+
+<script>
+function updateClock() {
+    document.getElementById("clock").innerHTML =
+        "⏰ " + new Date().toLocaleTimeString();
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
