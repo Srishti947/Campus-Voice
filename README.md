@@ -68,12 +68,13 @@ pip install -r requirements.txt
 python app.py
 ```
 
-4. Open
+### 4. Open locally
 
-```
 http://127.0.0.1:5000
-```
 
+## 🌐 Live Demo
+
+👉 [Campus Voice - Live Demo](https://campus-voice-sfps.onrender.com)
 ---
 
 ## 📌 Future Improvements
